@@ -8,5 +8,16 @@
 </head>
 <body>
     <h1>Meu Dashboard</h1>
+    {% if clientes_etapas %}
+    <table>
+        {% for cliente_etapa in clientes_etapas %}
+        <tr>
+            <th>{{ cliente_etapa.cliente.nome }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Sem dados disponiveis.</p>
+    {% endif %}
 </body>
 </html>
