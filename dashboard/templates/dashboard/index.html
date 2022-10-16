@@ -16,6 +16,18 @@
             <th>{{ etapa.descricao }}</th>
             {% endfor %}
         </tr>
+        <tr>
+            <th></th>
+            {% for funcionario in funcionarios %}
+            <th>{{ funcionario.nome }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th></th>
+            {% for tarefa in tarefas %}
+            <th>{{ tarefa.descricao }}</th>
+            {% endfor %}
+        </tr>
         {% for cliente in clientes %}
         <tr>
             <th>{{ cliente.nome }}</th>
