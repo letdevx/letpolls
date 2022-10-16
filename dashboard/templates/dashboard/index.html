@@ -10,9 +10,15 @@
     <h1>Meu Dashboard</h1>
     {% if clientes_etapas %}
     <table>
-        {% for cliente_etapa in clientes_etapas %}
         <tr>
-            <th>{{ cliente_etapa.cliente.nome }}</th>
+            <th></th>
+            {% for etapa in etapas %}
+            <th>{{ etapa.descricao }}</th>
+            {% endfor %}
+        </tr>
+        {% for cliente in clientes %}
+        <tr>
+            <th>{{ cliente.nome }}</th>
         </tr>
         {% endfor %}
     </table>
