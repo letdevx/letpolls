@@ -8,31 +8,38 @@
 </head>
 <body>
     <h1>Meu Dashboard</h1>
-    {% if execucoes %}
+    {% if clientes %}
     <table border="1px">
-        <tr>
-            <th></th>
-            {% for etapa in etapas %}
-            <th>{{ etapa.descricao }}</th>
+        <thead>
+            <tr>
+                <th></th>
+                {% for etapa in etapas %}
+                <th colspan="{{ etapa.qtd_tarefas }}">{{ etapa.descricao }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th></th>
+                {% for funcionario in funcionarios %}
+                <th colspan="{{ funcionario.qtd_tarefas }}">{{ funcionario.nome }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Obra</th>
+                {% for tarefa in tarefas %}
+                <th>{{ tarefa.descricao }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <th>{{ cliente.nome }}</th>
+                {% for execucao in cliente.execucoes %}
+                <td>{{ execucao.status }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        <tr>
-            <th></th>
-            {% for funcionario in funcionarios %}
-            <th>{{ funcionario.nome }}</th>
-            {% endfor %}
-        </tr>
-        <tr>
-            <th></th>
-            {% for tarefa in tarefas %}
-            <th>{{ tarefa.descricao }}</th>
-            {% endfor %}
-        </tr>
-        {% for cliente in clientes %}
-        <tr>
-            <th>{{ cliente.nome }}</th>
-        </tr>
-        {% endfor %}
+        </tbody>
     </table>
     {% else %}
     <p>Sem dados disponiveis.</p>
