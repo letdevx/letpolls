@@ -7,6 +7,7 @@ def index(request):
     clientes = Cliente.objects\
         .prefetch_related(Prefetch('execucao_set', to_attr='execucoes'))\
         .order_by('execucao__tarefa__id').all()
+    clientes_distintos = {cliente for cliente in clientes}
     etapas = Etapa.objects\
         .annotate(qtd_tarefas=Count('funcionario__tarefa'))\
         .order_by('id').all()
@@ -15,7 +16,7 @@ def index(request):
         .order_by('etapa_id','id').all()
     tarefas = Tarefa.objects.order_by('funcionario_id','id').all()
     context = {
-        'clientes': clientes,
+        'clientes': clientes_distintos,
         'etapas': etapas,
         'funcionarios': funcionarios,
         'tarefas': tarefas
