@@ -1,7 +1,6 @@
-from http.client import HTTPResponse
 from django.shortcuts import render
 from django.db.models import Prefetch, Count
-from .models import Execucao, Cliente, Etapa, Funcionario, Tarefa
+from .models import Cliente, Etapa, Funcionario, Tarefa
 
 # Create your views here.
 def index(request):
