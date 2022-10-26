@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+
+{# Carrega a biblioteca de tags #}
+{% load django_bootstrap5 %}
+
+{# Carrega o CSS e o Javascript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -8,10 +16,12 @@
 </head>
 <body>
     <h1>Funcionario</h1>
-    <form action="create" method="post">
+    <form action="create" method="post" class="form">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Salvar</button>
+
+        {% bootstrap_form form %}
+
+        {% bootstrap_button button_type="submit" content="Salvar" %}
     </form>
 </body>
 </html>
