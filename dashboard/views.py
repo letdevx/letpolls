@@ -11,15 +11,17 @@ def index(request):
         .order_by('execucao__tarefa__id').all()
     clientes_distintos = {cliente for cliente in clientes}
     etapas = Etapa.objects\
+        .annotate(qtd_funcionarios=Count('funcionario'))\
         .annotate(qtd_tarefas=Count('funcionario__tarefa'))\
         .order_by('id').all()
+    etapas_colspans = zip(etapas, [max(etapa.qtd_tarefas, etapa.qtd_funcionarios) for etapa in etapas])
     funcionarios = Funcionario.objects\
         .annotate(qtd_tarefas=Count('tarefa'))\
         .order_by('etapa_id','id').all()
     tarefas = Tarefa.objects.order_by('funcionario_id','id').all()
     context = {
         'clientes': clientes_distintos,
-        'etapas': etapas,
+        'etapas_colspans': etapas_colspans,
         'funcionarios': funcionarios,
         'tarefas': tarefas
     }

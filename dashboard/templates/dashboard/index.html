@@ -15,8 +15,8 @@
             <thead class="table-light">
                 <tr>
                     <th></th>
-                    {% for etapa in etapas %}
-                    <th colspan="{{ etapa.qtd_tarefas }}">{{ etapa.descricao }}</th>
+                    {% for etapa,colspan in etapas_colspans %}
+                    <th colspan="{{ colspan }}">{{ etapa.descricao }}</th>
                     {% endfor %}
                 </tr>
                 <tr>
