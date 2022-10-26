@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db.models import Prefetch, Count
 from django.http import HttpResponseRedirect
 from .models import Cliente, Etapa, Funcionario, Tarefa
-from .forms import CreateEtapaForm
+from .forms import CreateEtapaForm, CreateFuncionarioForm
 
 # Create your views here.
 def index(request):
@@ -35,3 +35,14 @@ def createEtapa(request):
     else:
         form = CreateEtapaForm()
     return render(request, 'dashboard/etapa_create.html', context={ 'form': form })
+
+def createFuncionario(request):
+    if request.method == 'POST':
+        form = CreateFuncionarioForm(request.POST)
+        if form.is_valid():
+            funcionario = Funcionario(nome=form.cleaned_data['nome'], etapa=form.cleaned_data['etapa'])
+            funcionario.save()
+            return HttpResponseRedirect('/dashboard')
+    else:
+        form = CreateFuncionarioForm()
+    return render(request, 'dashboard/funcionario_create.html', context={ 'form': form })
