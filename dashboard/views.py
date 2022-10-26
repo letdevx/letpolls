@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Prefetch, Count
+from django.http import HttpResponseRedirect
 from .models import Cliente, Etapa, Funcionario, Tarefa
 from .forms import CreateEtapaForm
 
@@ -27,9 +28,10 @@ def index(request):
 def createEtapa(request):
     if request.method == 'POST':
         form = CreateEtapaForm(request.POST)
-        # TODO
-        # if form.is_valid():
-            # save to db
+        if form.is_valid():
+            etapa = Etapa(descricao=form.cleaned_data['descricao'])
+            etapa.save()
+            return HttpResponseRedirect('/dashboard')
     else:
         form = CreateEtapaForm()
     return render(request, 'dashboard/etapa_create.html', context={ 'form': form })
