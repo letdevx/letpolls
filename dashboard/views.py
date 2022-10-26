@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Prefetch, Count
 from .models import Cliente, Etapa, Funcionario, Tarefa
+from .forms import CreateEtapaForm
 
 # Create your views here.
 def index(request):
@@ -22,3 +23,13 @@ def index(request):
         'tarefas': tarefas
     }
     return render(request, 'dashboard/index.html', context)
+
+def createEtapa(request):
+    if request.method == 'POST':
+        form = CreateEtapaForm(request.POST)
+        # TODO
+        # if form.is_valid():
+            # save to db
+    else:
+        form = CreateEtapaForm()
+    return render(request, 'dashboard/etapa_create.html', context={ 'form': form })

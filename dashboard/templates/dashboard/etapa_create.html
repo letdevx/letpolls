@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar/Editar Etapa</title>
+</head>
+<body>
+    <h1>Etapa</h1>
+    <form action="create" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="descricaoInput">Descricao</label>
+            <input type="text" id="descricaoInput" name="descricao" value="{{ form.descricao.value|default_if_none:'' }}">
+            <div>Descreva a etapa em poucas palavras.</div>
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
