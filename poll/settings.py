@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'dashboard.apps.DashboardConfig',
     'django_bootstrap5',
+    'teste.apps.TesteConfig',
 ]
 
 MIDDLEWARE = [
