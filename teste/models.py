@@ -4,7 +4,8 @@ from django.conf import settings
 # Create your models here. 
 
 class Processo (models.Model): 
-    descricao = models.CharField(max_length=200)
+    descricao = models.CharField(max_length=200) 
+    ordem_processo = models.IntegerField()
     def __str__(self):
         return self.descricao 
 

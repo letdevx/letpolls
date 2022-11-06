@@ -11,7 +11,8 @@ def index(request):
         .annotate(qtd_tarefas=Count('tarefa'))\
         .annotate(qtd_funcionarios=Count('tarefa__funcionario'))\
         .prefetch_related(Prefetch('tarefa_set', to_attr='tarefas'))\
-        .prefetch_related('tarefa_set__funcionario')
+        .prefetch_related('tarefa_set__funcionario')\
+        .order_by('ordem_processo')
     processos = list(query)
     # Descobre um colspan para cada processo, pegando sempre o maior (max)
     processos_colspans = zip(processos, [max(processo.qtd_tarefas, processo.qtd_funcionarios) for processo in processos])
